@@ -87,6 +87,40 @@
 
 
 
+        <!-- Analyzer Section -->
+        <div class="analyzer-section">
+            <div class="section-header">
+                <h2 class="section-title">Resume Analyzer</h2>
+                <p class="section-subtitle">Upload a resume to get instant AI-powered analysis and ATS scoring</p>
+            </div>
+
+            <div class="upload-container">
+                <div class="upload-box" id="uploadBox">
+                    <input type="file" id="fileInput" accept=".pdf,.docx,.txt" hidden>
+                    <div class="upload-icon">📁</div>
+                    <h3 class="upload-title">Drop your resume here or click to browse</h3>
+                    <p class="upload-text">Supports PDF, DOCX, and TXT files (Max 10MB)</p>
+                    <button class="btn-primary" onclick="document.getElementById('fileInput').click()">
+                        Choose File
+                    </button>
+                </div>
+
+                <div class="analyzer-options">
+                    <div class="form-group">
+                        <label for="jobDescription">Job Description (Optional)</label>
+                        <textarea id="jobDescription" placeholder="Paste job description for better matching..." rows="4"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="requiredSkills">Required Skills (Optional)</label>
+                        <input type="text" id="requiredSkills" placeholder="e.g., Python, JavaScript, AWS">
+                    </div>
+                    <button class="btn-secondary" id="analyzeBtn" disabled>
+                        <span class="btn-icon">🔍</span>
+                        Analyze Resume
+                    </button>
+                </div>
+            </div>
+        </div>
 
         <!-- Results Section -->
         <div class="results-section" id="resultsSection" style="display: none;">
