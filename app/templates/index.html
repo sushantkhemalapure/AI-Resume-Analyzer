@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATS Resume Analyzer - AI-Powered Recruitment</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo-container">
+            <div class="logo-icon">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="40" height="40" rx="12" fill="url(#gradient)"/>
+                    <path d="M12 20L18 26L28 14" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                        <linearGradient id="gradient" x1="0" y1="0" x2="40" y2="40">
+                            <stop stop-color="#667EEA"/>
+                            <stop offset="1" stop-color="#764BA2"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <div class="logo-title">ATS Analyzer</div>
+                <div class="logo-subtitle">AI-Powered Recruitment</div>
+            </div>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="#dashboard" class="nav-item active">
+                <span class="nav-icon">📊</span>
+                <span class="nav-label">Dashboard</span>
+            </a>
+            <a href="#analyzer" class="nav-item">
+                <span class="nav-icon">📄</span>
+                <span class="nav-label">Resume Analyzer</span>
+            </a>
+            <a href="#candidates" class="nav-item">
+                <span class="nav-icon">👥</span>
+                <span class="nav-label">Candidates</span>
+            </a>
+            <a href="#jobs" class="nav-item">
+                <span class="nav-icon">💼</span>
+                <span class="nav-label">Job Postings</span>
+            </a>
+            <a href="#analytics" class="nav-item">
+                <span class="nav-icon">📈</span>
+                <span class="nav-label">Analytics</span>
+            </a>
+            <a href="#settings" class="nav-item">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-label">Settings</span>
+            </a>
+        </nav>
+
+        <div class="demo-mode-badge">
+            <span class="demo-icon">ℹ️</span>
+            <span class="demo-text">Demo Mode</span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+
+
+
+
+
+
+        <!-- Results Section -->
+        <div class="results-section" id="resultsSection" style="display: none;">
+            <div class="section-header">
+                <h2 class="section-title">Analysis Results</h2>
+                <button class="btn-link" id="downloadReportBtn">Download Report →</button>
+            </div>
+
+            <!-- ATS Score Card -->
+            <div class="score-card">
+                <div class="score-header">
+                    <h3 class="score-title">ATS Compatibility Score</h3>
+                    <span class="score-grade" id="scoreGrade">-</span>
+                </div>
+                <div class="score-body">
+                    <div class="score-circle">
+                        <svg width="200" height="200" viewBox="0 0 200 200">
+                            <circle cx="100" cy="100" r="90" fill="none" stroke="#f0f0f0" stroke-width="20"/>
+                            <circle id="scoreCircle" cx="100" cy="100" r="90" fill="none" stroke="url(#scoreGradient)" 
+                                    stroke-width="20" stroke-linecap="round" 
+                                    stroke-dasharray="565.48" stroke-dashoffset="565.48"
+                                    transform="rotate(-90 100 100)"/>
+                            <text x="100" y="100" text-anchor="middle" dy="0.3em" class="score-text" id="scoreText">0</text>
+                            <defs>
+                                <linearGradient id="scoreGradient">
+                                    <stop offset="0%" stop-color="#667EEA"/>
+                                    <stop offset="100%" stop-color="#764BA2"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="score-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Formatting</span>
+                            <div class="detail-bar">
+                                <div class="detail-fill" id="formatScore" style="width: 0%"></div>
+                            </div>
+                            <span class="detail-value" id="formatValue">0%</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Keywords</span>
+                            <div class="detail-bar">
+                                <div class="detail-fill" id="keywordScore" style="width: 0%"></div>
+                            </div>
+                            <span class="detail-value" id="keywordValue">0%</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Experience</span>
+                            <div class="detail-bar">
+                                <div class="detail-fill" id="experienceScore" style="width: 0%"></div>
+                            </div>
+                            <span class="detail-value" id="experienceValue">0%</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Education</span>
+                            <div class="detail-bar">
+                                <div class="detail-fill" id="educationScore" style="width: 0%"></div>
+                            </div>
+                            <span class="detail-value" id="educationValue">0%</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Skills</span>
+                            <div class="detail-bar">
+                                <div class="detail-fill" id="skillsScore" style="width: 0%"></div>
+                            </div>
+                            <span class="detail-value" id="skillsValue">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills & Recommendations -->
+            <div class="grid-2">
+                <div class="card">
+                    <h3 class="card-title">Extracted Skills</h3>
+                    <div class="skills-container" id="skillsContainer">
+                        <!-- Skills will be dynamically added -->
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Recommendations</h3>
+                    <div class="recommendations-list" id="recommendationsList">
+                        <!-- Recommendations will be dynamically added -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
