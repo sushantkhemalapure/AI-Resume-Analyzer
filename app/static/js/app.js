@@ -285,7 +285,11 @@ function updateSectionScore(barId, valueId, score) {
 
 // Chart initialization
 function initializeCharts() {
-
+    // Monthly Applications Chart
+    const monthlyCtx = document.getElementById('monthlyChart');
+    if (monthlyCtx && !monthlyCtx.chart) {
+        drawMonthlyChart(monthlyCtx);
+    }
     
     // Skills Chart
     const skillsCtx = document.getElementById('skillsChart');
