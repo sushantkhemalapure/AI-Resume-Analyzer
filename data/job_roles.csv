@@ -1,0 +1,16 @@
+role,required_skills,preferred_skills,min_experience
+Software Engineer,"Python,Java,JavaScript,Git,Data Structures,Algorithms","AWS,Docker,Kubernetes,CI/CD",2
+Data Scientist,"Python,Machine Learning,Pandas,NumPy,Statistical Modeling","Deep Learning,TensorFlow,PyTorch,SQL",2
+Frontend Developer,"JavaScript,React,HTML,CSS,TypeScript","Vue.js,Angular,Redux,Webpack",1
+Backend Developer,"Python,Node.js,REST API,SQL,Database Design","GraphQL,Microservices,Redis,Docker",2
+Full Stack Developer,"JavaScript,React,Node.js,SQL,REST API","AWS,Docker,MongoDB,TypeScript",2
+DevOps Engineer,"Docker,Kubernetes,AWS,CI/CD,Linux","Terraform,Ansible,Jenkins,Python",3
+Mobile Developer,"iOS Development,Android Development,Swift,Kotlin","React Native,Flutter,Firebase",2
+Machine Learning Engineer,"Machine Learning,Python,TensorFlow,PyTorch,Deep Learning","MLOps,Kubernetes,AWS,Computer Vision",3
+Data Engineer,"SQL,Python,ETL,Data Warehousing,Spark","AWS,Airflow,Kafka,Snowflake",2
+Cloud Architect,"AWS,Azure,Cloud Architecture,Kubernetes,Terraform","Security,Networking,Cost Optimization",5
+Product Manager,"Product Management,Agile,Communication,Leadership","SQL,Analytics,UX Design",3
+UI/UX Designer,"UI Design,UX Design,Figma,Adobe XD,Prototyping","HTML,CSS,User Research,Animation",2
+QA Engineer,"Testing,Automation,Selenium,API Testing","Python,Java,CI/CD,Performance Testing",2
+Security Engineer,"Cybersecurity,Penetration Testing,Security Best Practices,Network Security","Python,Cloud Security,SIEM,Incident Response",3
+Business Analyst,"Data Analysis,SQL,Business Intelligence,Communication","Python,Tableau,Power BI,Excel",2
