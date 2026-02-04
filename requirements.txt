@@ -1,0 +1,9 @@
+fastapi==0.109.0
+uvicorn
+python-multipart
+jinja2
+python-docx
+PyPDF2
+langdetect
+scikit-learn
+pandas
