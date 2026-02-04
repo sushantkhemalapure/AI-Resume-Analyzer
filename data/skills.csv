@@ -1,0 +1,79 @@
+category,skill,weight
+Programming Languages,Python,0.9
+Programming Languages,Java,0.9
+Programming Languages,JavaScript,0.85
+Programming Languages,C++,0.85
+Programming Languages,C#,0.85
+Programming Languages,TypeScript,0.8
+Programming Languages,Go,0.8
+Programming Languages,Ruby,0.75
+Programming Languages,PHP,0.75
+Programming Languages,Swift,0.75
+Programming Languages,Kotlin,0.75
+Programming Languages,Rust,0.8
+Web Development,React,0.9
+Web Development,Angular,0.85
+Web Development,Vue.js,0.85
+Web Development,Node.js,0.9
+Web Development,Django,0.85
+Web Development,Flask,0.8
+Web Development,Spring Boot,0.85
+Web Development,Express.js,0.8
+Web Development,HTML,0.7
+Web Development,CSS,0.7
+Web Development,REST API,0.85
+Web Development,GraphQL,0.8
+Data Science,Machine Learning,0.95
+Data Science,Deep Learning,0.95
+Data Science,TensorFlow,0.9
+Data Science,PyTorch,0.9
+Data Science,Scikit-learn,0.85
+Data Science,Pandas,0.85
+Data Science,NumPy,0.8
+Data Science,Data Analysis,0.85
+Data Science,Statistical Modeling,0.85
+Data Science,Natural Language Processing,0.9
+Data Science,Computer Vision,0.9
+Database,SQL,0.9
+Database,MongoDB,0.85
+Database,PostgreSQL,0.85
+Database,MySQL,0.85
+Database,Redis,0.8
+Database,Cassandra,0.8
+Database,Oracle,0.8
+Database,Database Design,0.85
+Cloud & DevOps,AWS,0.95
+Cloud & DevOps,Azure,0.9
+Cloud & DevOps,Google Cloud,0.9
+Cloud & DevOps,Docker,0.9
+Cloud & DevOps,Kubernetes,0.95
+Cloud & DevOps,CI/CD,0.85
+Cloud & DevOps,Jenkins,0.8
+Cloud & DevOps,Terraform,0.85
+Cloud & DevOps,Ansible,0.8
+Mobile Development,iOS Development,0.85
+Mobile Development,Android Development,0.85
+Mobile Development,React Native,0.85
+Mobile Development,Flutter,0.85
+Mobile Development,SwiftUI,0.8
+Soft Skills,Communication,0.7
+Soft Skills,Leadership,0.75
+Soft Skills,Problem Solving,0.8
+Soft Skills,Team Collaboration,0.7
+Soft Skills,Project Management,0.75
+Soft Skills,Agile,0.8
+Soft Skills,Scrum,0.75
+Tools & Frameworks,Git,0.85
+Tools & Frameworks,GitHub,0.75
+Tools & Frameworks,Jira,0.7
+Tools & Frameworks,Tableau,0.75
+Tools & Frameworks,Power BI,0.75
+Security,Cybersecurity,0.9
+Security,Penetration Testing,0.85
+Security,OAuth,0.75
+Security,Security Best Practices,0.8
+AI & ML,Artificial Intelligence,0.95
+AI & ML,Neural Networks,0.9
+AI & ML,Reinforcement Learning,0.85
+AI & ML,GANs,0.85
+AI & ML,MLOps,0.85
