@@ -79,7 +79,18 @@ class SkillExtractor:
                     'matched': True
                 })
         
-
+        # Remove duplicates
+        unique_skills = []
+        seen = set()
+        
+        for skill in found_skills:
+            skill_key = skill['skill'].lower()
+            if skill_key not in seen:
+                seen.add(skill_key)
+                unique_skills.append(skill)
+        
+        logger.info(f"Extracted {len(unique_skills)} unique skills from resume")
+        return unique_skills
     
     def extract_skills_with_context(self, text: str, context_window: int = 50) -> List[Dict]:
         """
