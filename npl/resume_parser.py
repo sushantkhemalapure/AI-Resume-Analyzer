@@ -242,7 +242,7 @@ class ResumeParser:
         
         return None
     
-    def _extract_email(self, text:-> Optional[str]:
+    def _extract_email(self, text: str) -> Optional[str]:
         """Extract email address"""
         email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
         match = re.search(email_pattern, text)
