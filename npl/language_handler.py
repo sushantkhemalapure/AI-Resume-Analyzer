@@ -313,7 +313,20 @@ async def compare_candidates(
             required_skills_list
         )
         
-
+        # Prepare response
+        response = {
+            "success": True,
+            "total_candidates": len(ranked_candidates),
+            "candidates": [
+                {
+                    "filename": c['filename'],
+                    "match_score": round(c['match_score'], 2),
+                    "match_level": c['match_level'],
+                    "skills": c['skills'][:10]  # Top 10 skills
+                }
+                for c in ranked_candidates
+            ]
+        }
         
         return JSONResponse(content=response)
     
