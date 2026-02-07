@@ -306,7 +306,12 @@ async def compare_candidates(
                 'skills': skill_names
             })
         
-
+        # Rank candidates
+        ranked_candidates = similarity_calculator.rank_candidates(
+            candidates,
+            job_description,
+            required_skills_list
+        )
         
 
         
