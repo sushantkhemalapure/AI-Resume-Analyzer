@@ -283,7 +283,55 @@ class SimilarityCalculator:
         logger.info(f"Job match score calculated: {overall_score:.2f}/100 ({match_level})")
         return result
     
-
+    def _generate_recommendations(self,
+                                 skill_match: Dict,
+                                 experience_match: Dict,
+                                 overall_score: float) -> List[str]:
+        """
+        Generate recommendations to improve job match
+        
+        Args:
+            skill_match: Skill match results
+            experience_match: Experience match results
+            overall_score: Overall match score
+            
+        Returns:
+            List of recommendations
+        """
+        recommendations = []
+        
+        # Skill recommendations
+        if skill_match['match_percentage'] < 70:
+            missing = skill_match['missing_skills'][:5]
+            recommendations.append(
+                f"Focus on developing these skills: {', '.join(missing)}"
+            )
+        
+        if skill_match['match_percentage'] < 50:
+            recommendations.append(
+                "Consider additional training or certifications in required areas."
+            )
+        
+        # Experience recommendations
+        if not experience_match['meets_requirement']:
+            recommendations.append(
+                f"Gain more experience. Target: {experience_match['required_years']} years"
+            )
+        
+        # General recommendations
+        if overall_score < 60:
+            recommendations.append(
+                "This position may not be the best fit. Consider roles matching your skills."
+            )
+        elif overall_score < 80:
+            recommendations.append(
+                "Highlight relevant projects and experiences in your application."
+            )
+        
+        if not recommendations:
+            recommendations.append("You're a strong match for this position!")
+        
+        return recommendations
     
 
 
