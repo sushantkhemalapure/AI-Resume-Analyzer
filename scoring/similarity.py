@@ -218,7 +218,70 @@ class SimilarityCalculator:
         
         return result
     
-
+    def calculate_job_match_score(self,
+                                 resume_text: str,
+                                 job_description: str,
+                                 resume_skills: List[str],
+                                 job_skills: List[str],
+                                 required_years: int = None) -> Dict:
+        """
+        Calculate overall job match score
+        
+        Args:
+            resume_text: Full resume text
+            job_description: Job description text
+            resume_skills: Skills extracted from resume
+            job_skills: Required skills from job
+            required_years: Required years of experience
+            
+        Returns:
+            Dictionary with comprehensive match analysis
+        """
+        # Calculate text similarity
+        text_similarity = self.calculate_text_similarity(resume_text, job_description)
+        
+        # Calculate skill match
+        skill_match = self.calculate_skill_match(resume_skills, job_skills)
+        
+        # Calculate experience match
+        experience_match = self.calculate_experience_match(resume_text, required_years)
+        
+        # Calculate weighted overall score
+        weights = {
+            'text_similarity': 0.25,
+            'skill_match': 0.50,
+            'experience_match': 0.25
+        }
+        
+        overall_score = (
+            text_similarity['overall_similarity'] * weights['text_similarity'] * 100 +
+            skill_match['match_percentage'] * weights['skill_match'] +
+            (100 if experience_match['meets_requirement'] else 50) * weights['experience_match']
+        )
+        
+        # Generate match level
+        if overall_score >= 80:
+            match_level = 'Excellent Match'
+        elif overall_score >= 70:
+            match_level = 'Good Match'
+        elif overall_score >= 60:
+            match_level = 'Fair Match'
+        else:
+            match_level = 'Poor Match'
+        
+        result = {
+            'overall_score': overall_score,
+            'match_level': match_level,
+            'text_similarity': text_similarity,
+            'skill_match': skill_match,
+            'experience_match': experience_match,
+            'recommendations': self._generate_recommendations(
+                skill_match, experience_match, overall_score
+            )
+        }
+        
+        logger.info(f"Job match score calculated: {overall_score:.2f}/100 ({match_level})")
+        return result
     
 
     
