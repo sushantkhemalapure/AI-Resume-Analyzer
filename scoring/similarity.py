@@ -333,7 +333,41 @@ class SimilarityCalculator:
         
         return recommendations
     
-
+    def rank_candidates(self, 
+                       candidates: List[Dict],
+                       job_description: str,
+                       job_skills: List[str]) -> List[Dict]:
+        """
+        Rank multiple candidates for a job
+        
+        Args:
+            candidates: List of candidate dictionaries with resume_text and skills
+            job_description: Job description text
+            job_skills: Required job skills
+            
+        Returns:
+            Sorted list of candidates with scores
+        """
+        scored_candidates = []
+        
+        for candidate in candidates:
+            match_result = self.calculate_job_match_score(
+                candidate['resume_text'],
+                job_description,
+                candidate['skills'],
+                job_skills
+            )
+            
+            candidate['match_score'] = match_result['overall_score']
+            candidate['match_level'] = match_result['match_level']
+            candidate['match_details'] = match_result
+            
+            scored_candidates.append(candidate)
+        
+        # Sort by match score (descending)
+        scored_candidates.sort(key=lambda x: x['match_score'], reverse=True)
+        
+        return scored_candidates
 
 
 def test_similarity_calculator():
