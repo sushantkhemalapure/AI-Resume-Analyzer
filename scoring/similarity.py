@@ -169,7 +169,55 @@ class SimilarityCalculator:
             'required_count': len(job_skills_set)
         }
     
-
+    def calculate_experience_match(self,
+                                  resume_text: str,
+                                  required_years: int = None) -> Dict:
+        """
+        Calculate experience level match
+        
+        Args:
+            resume_text: Resume text
+            required_years: Required years of experience
+            
+        Returns:
+            Dictionary with experience match details
+        """
+        # Extract years of experience from resume
+        experience_patterns = [
+            r'(\d+)\+?\s*years?\s+(?:of\s+)?experience',
+            r'experience\s+(?:of\s+)?(\d+)\+?\s*years?'
+        ]
+        
+        years_found = []
+        for pattern in experience_patterns:
+            matches = re.finditer(pattern, resume_text.lower())
+            for match in matches:
+                years_found.append(int(match.group(1)))
+        
+        candidate_years = max(years_found) if years_found else 0
+        
+        result = {
+            'candidate_years': candidate_years,
+            'required_years': required_years,
+            'meets_requirement': False,
+            'experience_level': 'Entry Level'
+        }
+        
+        if required_years:
+            result['meets_requirement'] = candidate_years >= required_years
+        
+        # Categorize experience level
+        if candidate_years >= 10:
+            result['experience_level'] = 'Senior/Expert'
+        elif candidate_years >= 5:
+            result['experience_level'] = 'Senior'
+        elif candidate_years >= 2:
+            result['experience_level'] = 'Mid-Level'
+        elif candidate_years >= 1:
+            result['experience_level'] = 'Junior'
+        
+        return result
+    
 
     
 
