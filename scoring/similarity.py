@@ -138,7 +138,36 @@ class SimilarityCalculator:
             'overall_similarity': (cosine_sim * 0.4 + jaccard_sim * 0.3 + overlap * 0.3)
         }
     
-
+    def calculate_skill_match(self, 
+                             resume_skills: List[str],
+                             job_skills: List[str]) -> Dict:
+        """
+        Calculate skill matching score
+        
+        Args:
+            resume_skills: Skills from resume
+            job_skills: Required skills from job
+            
+        Returns:
+            Dictionary with skill match details
+        """
+        resume_skills_set = {skill.lower() for skill in resume_skills}
+        job_skills_set = {skill.lower() for skill in job_skills}
+        
+        matched_skills = resume_skills_set & job_skills_set
+        missing_skills = job_skills_set - resume_skills_set
+        extra_skills = resume_skills_set - job_skills_set
+        
+        match_percentage = len(matched_skills) / len(job_skills_set) * 100 if job_skills_set else 0
+        
+        return {
+            'match_percentage': match_percentage,
+            'matched_skills': list(matched_skills),
+            'missing_skills': list(missing_skills),
+            'extra_skills': list(extra_skills),
+            'matched_count': len(matched_skills),
+            'required_count': len(job_skills_set)
+        }
     
 
 
