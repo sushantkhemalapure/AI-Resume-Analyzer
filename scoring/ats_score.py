@@ -216,7 +216,63 @@ class ATSScoreCalculator:
         
         return score, matches, recommendations
     
-
+    def _score_experience(self, text: str, sections: Dict[str, str] = None) -> Tuple[float, List[str]]:
+        """
+        Score work experience section
+        
+        Returns:
+            Tuple of (score, recommendations)
+        """
+        score = 100.0
+        recommendations = []
+        
+        text_lower = text.lower()
+        
+        # Check if experience section exists
+        has_experience = any(
+            keyword in text_lower 
+            for keyword in ['experience', 'employment', 'work history']
+        )
+        
+        if not has_experience:
+            score -= 50
+            recommendations.append("Add a Work Experience or Employment History section.")
+            return max(0, score), recommendations
+        
+        # Check for dates
+        date_patterns = [
+            r'\d{4}\s*[-–]\s*\d{4}',  # 2020-2023
+            r'\d{4}\s*[-–]\s*present',  # 2020-Present
+            r'\w+\s+\d{4}\s*[-–]\s*\w+\s+\d{4}',  # Jan 2020 - Dec 2023
+        ]
+        
+        has_dates = any(re.search(pattern, text, re.IGNORECASE) for pattern in date_patterns)
+        if not has_dates:
+            score -= 20
+            recommendations.append("Include dates (start and end) for each position.")
+        
+        # Check for action verbs
+        action_verbs = [
+            'developed', 'created', 'managed', 'led', 'implemented',
+            'designed', 'built', 'improved', 'achieved', 'established'
+        ]
+        
+        action_verb_count = sum(1 for verb in action_verbs if verb in text_lower)
+        if action_verb_count < 5:
+            score -= 15
+            recommendations.append(
+                "Use strong action verbs (e.g., developed, managed, implemented)."
+            )
+        
+        # Check for quantifiable achievements
+        has_numbers = bool(re.search(r'\d+%|\$\d+|\d+\+', text))
+        if not has_numbers:
+            score -= 15
+            recommendations.append(
+                "Add quantifiable achievements (e.g., 'Increased sales by 30%')."
+            )
+        
+        return max(0, score), recommendations
     
 
         
