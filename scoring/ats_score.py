@@ -127,7 +127,56 @@ class ATSScoreCalculator:
             keyword_total=len(required_keywords) if required_keywords else 0
         )
     
-
+    def _score_formatting(self, text: str) -> Tuple[float, List[str]]:
+        """
+        Score resume formatting and structure
+        
+        Returns:
+            Tuple of (score, recommendations)
+        """
+        score = 100.0
+        recommendations = []
+        
+        # Check length (ideal: 1-2 pages = 500-2000 words)
+        word_count = len(text.split())
+        if word_count < 300:
+            score -= 20
+            recommendations.append("Resume is too short. Add more details about your experience.")
+        elif word_count > 3000:
+            score -= 15
+            recommendations.append("Resume is too long. Keep it concise (1-2 pages ideal).")
+        
+        # Check for special characters that confuse ATS
+        problematic_chars = ['•', '★', '◆', '▪', '►']
+        if any(char in text for char in problematic_chars):
+            score -= 10
+            recommendations.append("Replace special bullet characters with standard hyphens or asterisks.")
+        
+        # Check for tables (ATS often struggles with tables)
+        if '\t' in text or '|' in text:
+            score -= 10
+            recommendations.append("Avoid using tables. Use simple text formatting instead.")
+        
+        # Check for contact information
+        has_email = bool(re.search(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b', text))
+        has_phone = bool(re.search(r'\d{3}[-.\s]?\d{3}[-.\s]?\d{4}', text))
+        
+        if not has_email:
+            score -= 15
+            recommendations.append("Add a professional email address.")
+        if not has_phone:
+            score -= 10
+            recommendations.append("Include a phone number.")
+        
+        # Check for section headers
+        common_headers = ['experience', 'education', 'skills', 'summary']
+        headers_found = sum(1 for header in common_headers if header in text.lower())
+        
+        if headers_found < 3:
+            score -= 15
+            recommendations.append("Use clear section headers (Experience, Education, Skills, etc.).")
+        
+        return max(0, score), recommendations
     
 
     
