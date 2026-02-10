@@ -274,7 +274,63 @@ class ATSScoreCalculator:
         
         return max(0, score), recommendations
     
-
+    def _score_education(self, text: str, sections: Dict[str, str] = None) -> Tuple[float, List[str]]:
+        """
+        Score education section
+        
+        Returns:
+            Tuple of (score, recommendations)
+        """
+        score = 100.0
+        recommendations = []
+        
+        text_lower = text.lower()
+        
+        # Check if education section exists
+        has_education = 'education' in text_lower
+        
+        if not has_education:
+            score -= 40
+            recommendations.append("Add an Education section with your degrees.")
+            return max(0, score), recommendations
+        
+        # Check for degree
+        degree_keywords = [
+            'bachelor', 'master', 'phd', 'doctorate', 'b.s.', 'm.s.',
+            'b.a.', 'm.a.', 'mba', 'degree'
+        ]
+        
+        has_degree = any(keyword in text_lower for keyword in degree_keywords)
+        if not has_degree:
+            score -= 30
+            recommendations.append("Specify your degree (e.g., Bachelor of Science).")
+        
+        # Check for graduation year
+        has_year = bool(re.search(r'\b(19|20)\d{2}\b', text))
+        if not has_year:
+            score -= 20
+            recommendations.append("Include graduation year or expected graduation date.")
+        
+        # Check for GPA (optional but good to have if strong)
+        has_gpa = bool(re.search(r'gpa|grade point average', text_lower))
+        if not has_gpa:
+            recommendations.append(
+                "Consider adding GPA if it's 3.5 or higher (optional)."
+            )
+        
+        return max(0, score), recommendations
+    
+    def _score_skills(self, extracted_skills: List[Dict]) -> Tuple[float, List[str]]:
+        """
+        Score skills section
+        
+        Returns:
+            Tuple of (score, recommendations)
+        """
+        score = 100.0
+        recommendations = []
+        
+        skill_count = len(extracted_skills)
         
 
     
