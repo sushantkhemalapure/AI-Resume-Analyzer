@@ -332,7 +332,35 @@ class ATSScoreCalculator:
         
         skill_count = len(extracted_skills)
         
-
+        # Check number of skills
+        if skill_count == 0:
+            score = 0
+            recommendations.append("Add a Skills section with relevant technical skills.")
+            return score, recommendations
+        elif skill_count < 5:
+            score -= 30
+            recommendations.append("Add more relevant skills (aim for 8-15 skills).")
+        elif skill_count > 20:
+            score -= 20
+            recommendations.append("Focus on most relevant skills. Remove less important ones.")
+        
+        # Check skill diversity (different categories)
+        categories = set(skill['category'] for skill in extracted_skills)
+        if len(categories) < 3:
+            score -= 15
+            recommendations.append(
+                "Include skills from multiple categories (technical, tools, soft skills)."
+            )
+        
+        # Check for high-value skills (weight > 0.85)
+        high_value_skills = [s for s in extracted_skills if s['weight'] > 0.85]
+        if len(high_value_skills) < 3:
+            score -= 20
+            recommendations.append(
+                "Include more in-demand, high-value skills for your field."
+            )
+        
+        return max(0, score), recommendations
     
 
 
