@@ -178,7 +178,43 @@ class ATSScoreCalculator:
         
         return max(0, score), recommendations
     
-
+    def _score_keywords(self, text: str, keywords: List[str]) -> Tuple[float, int, List[str]]:
+        """
+        Score keyword presence and density
+        
+        Returns:
+            Tuple of (score, matches_count, recommendations)
+        """
+        text_lower = text.lower()
+        matches = 0
+        missing_keywords = []
+        
+        for keyword in keywords:
+            keyword_lower = keyword.lower()
+            if keyword_lower in text_lower:
+                matches += 1
+            else:
+                missing_keywords.append(keyword)
+        
+        # Calculate score based on match percentage
+        match_percentage = (matches / len(keywords)) * 100 if keywords else 0
+        score = match_percentage
+        
+        recommendations = []
+        if match_percentage < 70:
+            recommendations.append(
+                f"Include these important keywords: {', '.join(missing_keywords[:5])}"
+            )
+        
+        # Check keyword density (should appear naturally, not stuffed)
+        total_words = len(text.split())
+        keyword_density = (matches / total_words) * 100 if total_words > 0 else 0
+        
+        if keyword_density > 5:
+            score -= 10
+            recommendations.append("Keyword density is too high. Use keywords naturally.")
+        
+        return score, matches, recommendations
     
 
     
