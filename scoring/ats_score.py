@@ -362,7 +362,26 @@ class ATSScoreCalculator:
         
         return max(0, score), recommendations
     
-
+    def get_grade(self, score: float) -> str:
+        """
+        Convert numeric score to letter grade
+        
+        Args:
+            score: Numeric score (0-100)
+            
+        Returns:
+            Letter grade
+        """
+        if score >= 90:
+            return 'A'
+        elif score >= 80:
+            return 'B'
+        elif score >= 70:
+            return 'C'
+        elif score >= 60:
+            return 'D'
+        else:
+            return 'F'
 
 
 def test_ats_calculator():
