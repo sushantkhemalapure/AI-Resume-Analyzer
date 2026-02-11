@@ -49,3 +49,11 @@ AI-Resume-Analyzer/
 ├── README.md                      # Documentation
 └── LICENSE                        # License file
 ```
+### Dashboard
+Modern, gradient-based interface with real-time statistics
+
+### Analysis Results
+Detailed ATS scoring with visual feedback and recommendations
+
+### Skill Detection
+Categorized skill extraction with weighted importance
